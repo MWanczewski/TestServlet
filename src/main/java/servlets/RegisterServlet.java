@@ -1,6 +1,7 @@
 package servlets;
 
 import dao.MapUserDao;
+import model.AppUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,17 @@ public class RegisterServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/registerUser.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter(LOGIN);
+        AppUser user = AppUser.AppUserBuilder.getBuilder()
+                .login(req.getParameter(LOGIN))
+                .password(req.getParameter(PASSWORD))
+                .email(req.getParameter(EMAIL))
+                .build();
+        userDao.addUser(user);
     }
 }
