@@ -16,8 +16,8 @@
 <body>
 <c:forEach items="${users}" var="user">
     <div>
-        <p><strong>user.login</strong></p><br>
-        <p><strong>user.email</strong></p><br>
+        <p><strong>${user.login}</strong></p><br>
+        <p><strong>${user.email}</strong></p><br>
     </div>
     <hr>
     <br>
